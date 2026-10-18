@@ -3,8 +3,6 @@ import sqlite3
 import datetime
 import os
 
-app = Flask(__name__)
-
 def get_db_connection():
     if os.environ.get('VERCEL'):
         db_path = '/tmp/database.db'
