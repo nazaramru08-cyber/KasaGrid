@@ -5,6 +5,11 @@ import datetime
 app = Flask(__name__)
 
 def get_db_connection():
+    if os.environ.get('VERCEL'):
+        db_path = '/tmp/database.db'
+    else:
+        db_path = 'database.db'
+        
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
