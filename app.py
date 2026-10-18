@@ -1,11 +1,17 @@
 from flask import Flask, render_template, request, jsonify
 import sqlite3
 import datetime
+import os
 
 app = Flask(__name__)
 
 def get_db_connection():
-    conn = sqlite3.connect('database.db')
+    if os.environ.get('VERCEL'):
+        db_path = '/tmp/database.db'
+    else:
+        db_path = 'database.db'
+        
+    conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
 
